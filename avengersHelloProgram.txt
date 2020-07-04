@@ -1,0 +1,4 @@
+FMPTOPD.`.HPM.{."Hello World".}
+GJ.{.1.=.1.}.(
+    FMPTOPD.`.HPM.{."Hello World".}
+)
