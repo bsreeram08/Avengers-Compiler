@@ -25,9 +25,10 @@ lineInterface.on("line", (line) => {
 });
 lineInterface.on('close', () => {
   if (result) {
-    for (let iter = 0; iter < converted.length; iter++) {
-      console.log(converted[iter]);
-    }
+    let file = fs.createWriteStream('output.js');
+    file.on('error', (err) => { console.log("Error : " + err) })
+    converted.forEach((line) => { file.write(line + "\n"); })
+    file.end();
   }
 });
 function bracketStackSHandler(item) {
