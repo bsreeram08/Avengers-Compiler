@@ -3,13 +3,13 @@ const readLine = require("readline");
 const lineInterface = readLine.createInterface({
   input: fs.createReadStream("avengersHelloProgram.txt", "utf8"),
 });
+const converted = [];
+const bracketStack = [];
 const grammar = [",,", "::", "\"", "\'", ",,", ";;", "\`", "&&", "||", "&", "|", "{", "}", "(", ")", "==", "=", "--", "++"];
 const replaceGrammar = [',', ':', "\'", "\"", ",", ";", ".", "&", "|", "&&", "||", "(", ")", "{", "}", "=", "==", "++", "--"];
 const number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const alphabets = ['z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 let lineNo = 0, convertedLine;
-let converted = [];
-let bracketStack = [];
 let topBracketStack = -1;
 let result = true;
 lineInterface.on("line", (line) => {
@@ -68,9 +68,7 @@ function checkSyntax(lineOfCode) {
 function convertLine(lineOfCode, line) {
   let tokens = lineOfCode.split(".");
   if (checkSyntax(tokens)) {
-    for (let iter = 0; iter < tokens.length; iter++) {
-      tokens[iter] = convertToken(tokens[iter]);
-    }
+    tokens.map(item => convertToken(item));
     if (tokens[tokens.length - 1] != "{" && tokens[tokens.length - 1] != '}') {
       tokens.push(";");
     }
@@ -84,21 +82,7 @@ function convertLine(lineOfCode, line) {
 }
 function convertToken(token) {
   let result = [];
-  const inGrammar = (token) => {
-    for (let iter = 0; iter < grammar.length; iter++) {
-      if (grammar[iter] === token) {
-        return true;
-      }
-    }
-  }
-  const strrev = (token) => {
-    res = "";
-    for (let iter = token.length - 1; iter > -1; iter--) {
-      res = res + token[iter];
-    }
-    return res;
-  }
-  if (inGrammar(token)) {
+  if (grammar.find(item => { return (token === item) }) === true) {
     let index = grammar.indexOf(token);
     result.push(replaceGrammar[index]);
   }
@@ -128,7 +112,7 @@ function convertToken(token) {
             result.push(alphabets[index - 1]);
         }
       }
-      result = strrev(result);
+      result = result.reverse().join("");
     }
   }
   return result;
