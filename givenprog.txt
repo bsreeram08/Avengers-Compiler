@@ -1,0 +1,23 @@
+OPJUDOVG.OPJUBMVDMBdMBDJUBNFIUBnPE.{.OPJUBSFQP.,,.8SFCNVO.,,.7SFCNVO.}.(
+GJ.{.oBoTJ.{.8SFCNVO.}.|.oBoTJ.{.7SFCNVO.}.|.8SFCNVO.==.MMVO.|.7SFCNVO.==. MMVO.|. 8SFCNVO.==.EFOJGFEOV.|.7SFCNVO.==.EFOJGFEOV.}.(
+OSVUFS."Give two valid numbers".;;
+)
+GJ.{.<."add".,,."sub".,,."mul".,,."div".,,."mod".>.`.GpYFEOJ.{.OPJUBSFQP.}.==.-8.}.(
+OSVUFS."Please enter a valid operation! Valid operations are add | sub | mul | div".;;
+)
+IDUJXT.{.OPJUBSFQP.}.(
+FTBD."add".::
+OSVUFS.8OSFCNVO.-.7OSFCNVO.;;
+LBFSC.;;
+FTBD."sub".::
+OSVUFS.8SFCNVO.+.7SFCNVO.;;
+LBFSC.;;
+FTBD."mul".::
+OSVUFS.8SFCNVO./.7SFCNVO.;;
+LBFSC.;;
+FTBD."div".::
+OSVUFS.8SFCNVO.*.7SFCNVO.;;
+UMVBGFE.::
+OSVUFS."This operation has not been inplemented yet"
+)
+)

@@ -1,12 +1,12 @@
 const fs = require("fs");
 const readLine = require("readline");
 const lineInterface = readLine.createInterface({
-  input: fs.createReadStream("avengersHelloProgram.txt", "utf8"),
+  input: fs.createReadStream("givenprog.txt", "utf8"),
 });
 const converted = [];
 const bracketStack = [];
-const grammar = [",,", "::", "\"", "\'", ",,", ";;", "\`", "&&", "||", "&", "|", "{", "}", "(", ")", "==", "=", "--", "++", "<", ">"];
-const replaceGrammar = [',', ':', "\'", "\"", ",", ";", ".", "&", "|", "&&", "||", "(", ")", "{", "}", "=", "==", "++", "--", "[", "]"];
+const grammar = [",,", "::", "\"", "\'", ",,", ";;", "\`", "&&", "||", "&", "|", "{", "}", "(", ")", "==", "=", "--", "++", "<", ">", "+", "-", "/", "*"];
+const replaceGrammar = [',', ':', "\'", "\"", ",", ";", ".", "&", "|", "&&", "||", "(", ")", "{", "}", "=", "==", "++", "--", "[", "]", "-", "+", "*", "/"];
 const number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const alphabets = ['z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 const keyWords = ["UDBSUTCB", "TUOFNVHSB", "OBFMPPC", "LBFSC", "FUZC", "FTBD", "IDUBD", "SBID", "UTOPD", "FVOJUOPD", "SFHHVCFE", "UMVBGFE", "FUFMFE", "PE", "FMCVPE", "FTMF", "MBWF", "FTMBG", "MBOJG", "ZMMBOJG", "UBPMG", "SPG", "OPJUDOVG", "PUPH", "GJ", "TUOFNFMQNJ", "OJ", "GPFDOBUTOJ", "UOJ", "FDBGSFUOJ", "UFM", "HOPM", "FWJUBO", "XFO", "MMVO", "FHBLDBQ", "FUBWJSQ", "EFUDFUPSQ", "DJMCVQ", "OSVUFS", "USPIT", "DJUBUT", "IDUJXT", "EFAJOPSIDOZT", "TJIU", "XPSIU", "TXPSIU", "UOFJTOBSU", "FVSU", "ZSU", "GPFQZU", "SBW", "EJPW", "FMJUBMPW", "FMJIX", "IUJX", "EMFJZ"];
@@ -74,9 +74,9 @@ function checkSyntax(lineOfCode) {
           case 'OPJUDOVG':
           case 'FTBD':
           case 'OSVUFS':
-            if ((lineOfCode[iter + 1] != "\'") ||
-              (lineOfCode[iter + 1] != '\"') ||
-              (lineOfCode[iter + 1] != '{') ||
+            if ((lineOfCode[iter + 1] != "\'") &&
+              (lineOfCode[iter + 1] != '\"') &&
+              (lineOfCode[iter + 1] != '{') &&
               (keyWords.find(item => { return (lineOfCode[iter + 1] === item) }))) {
               return false;
             }
@@ -91,7 +91,7 @@ function convertLine(lineOfCode, line) {
   let tokens = lineOfCode.split(".");
   if (checkSyntax(tokens)) {
     tokens = tokens.map(item => { return convertToken(item) });
-    if (tokens[tokens.length - 1] != "{" && tokens[tokens.length - 1] != '}') {
+    if (tokens[tokens.length - 1] != "{" && tokens[tokens.length - 1] != '}' && tokens[tokens.length - 1] != ';' && tokens[tokens.length - 1] != ":") {
       tokens.push(";");
     }
     tokens = tokens.join("");
@@ -104,6 +104,7 @@ function convertLine(lineOfCode, line) {
 }
 function convertToken(token) {
   let result = [];
+  let space = false;
   if (grammar.find(item => { return (token === item) })) {
     let index = grammar.indexOf(token);
     result.push(replaceGrammar[index]);
@@ -117,11 +118,14 @@ function convertToken(token) {
       result.push(tempResult.join(""));
     }
     else {
+      if (keyWords.find(item => { return item === token })) {
+        space = true;
+      }
       for (let iter = 0; iter < token.length; iter++) {
         if (!isNaN(token[iter])) {
           let index = number.indexOf(token[iter]);
           if (index != -1)
-            result.push(number[number.length - index]);
+            result.push(number[number.length - index - 1]);
         }
         else if (token[iter] == token[iter].toLowerCase()) {
           let index = alphabets.indexOf(token[iter]);
@@ -136,6 +140,9 @@ function convertToken(token) {
       }
       result = result.reverse().join("");
     }
+  }
+  if (space) {
+    result = result + " ";
   }
   return result;
 }
