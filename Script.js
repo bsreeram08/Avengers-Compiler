@@ -5,8 +5,8 @@ const lineInterface = readLine.createInterface({
 });
 const converted = [];
 const bracketStack = [];
-const grammar = [",,", "::", "\"", "\'", ",,", ";;", "\`", "&&", "||", "&", "|", "{", "}", "(", ")", "==", "=", "--", "++"];
-const replaceGrammar = [',', ':', "\'", "\"", ",", ";", ".", "&", "|", "&&", "||", "(", ")", "{", "}", "=", "==", "++", "--"];
+const grammar = [",,", "::", "\"", "\'", ",,", ";;", "\`", "&&", "||", "&", "|", "{", "}", "(", ")", "==", "=", "--", "++", "<", ">"];
+const replaceGrammar = [',', ':', "\'", "\"", ",", ";", ".", "&", "|", "&&", "||", "(", ")", "{", "}", "=", "==", "++", "--", "[", "]"];
 const number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const alphabets = ['z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 const keyWords = ["UDBSUTCB", "TUOFNVHSB", "OBFMPPC", "LBFSC", "FUZC", "FTBD", "IDUBD", "SBID", "UTOPD", "FVOJUOPD", "SFHHVCFE", "UMVBGFE", "FUFMFE", "PE", "FMCVPE", "FTMF", "MBWF", "FTMBG", "MBOJG", "ZMMBOJG", "UBPMG", "SPG", "OPJUDOVG", "PUPH", "GJ", "TUOFNFMQNJ", "OJ", "GPFDOBUTOJ", "UOJ", "FDBGSFUOJ", "UFM", "HOPM", "FWJUBO", "XFO", "MMVO", "FHBLDBQ", "FUBWJSQ", "EFUDFUPSQ", "DJMCVQ", "OSVUFS", "USPIT", "DJUBUT", "IDUJXT", "EFAJOPSIDOZT", "TJIU", "XPSIU", "TXPSIU", "UOFJTOBSU", "FVSU", "ZSU", "GPFQZU", "SBW", "EJPW", "FMJUBMPW", "FMJIX", "IUJX", "EMFJZ"];
